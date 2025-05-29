@@ -72,20 +72,25 @@ function Game() {
 
   return (
     <div className="">
-      <div className="flex items-center justify-center text-center text-5xl mb-10">
+      <div className="flex justify-center text-center text-5xl mb-10">
         Let's TicTacTo!
       </div>
-      <div className="flex gap-[10rem] w-full p-4">
-        <div className="flex-1">
+      <div className="flex gap-[10rem] w-full p-4 items-start">
+        <div className="flex-1 text-center">
+          <div className="text-2xl mb-4">
+            {winner
+              ? `Winner: ${winner}`
+              : `Next player : ${xIsNext ? "X" : "O"}`}
+          </div>
           <Board
             xIsNext={xIsNext}
             squares={currentSquares}
             onPlay={handlePlay}
           />
         </div>
-        <div className="flex-1 mt-6 ml-8 text-center">
-          <div className="text-2xl">History</div>
-          <ol>{moves}</ol>
+        <div className="flex-1 text-center items-start">
+          <div className="text-2xl mb-4">History</div>
+          <ol className="flex flex-col gap-1">{moves}</ol>
         </div>
       </div>
 
@@ -93,7 +98,7 @@ function Game() {
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded shadow text-center">
             <h2 className="text-2xl mb-8 px-2">
-              {winner ? `🎉 Winner: ${winner} 🎉` : "무승부입니다!"}
+              {winner ? `🎉  Winner: ${winner}  🎉` : "무승부입니다!"}
             </h2>
             <button
               onClick={restartGame}

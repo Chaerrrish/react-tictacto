@@ -42,15 +42,8 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
     onPlay(nextSquares);
   };
 
-  let status = `Next player : ${xIsNext ? "X" : "O"}`;
-  const winner = calculateWinner(squares);
-  if (winner) {
-    status = `Winner: ${winner}`;
-  }
-
   return (
     <>
-      <div className="mb-6 text-2xl text-center">{status}</div>
       <div className="grid grid-cols-3 w-max border border-black">
         {squares.map((value, index) => (
           <Square
