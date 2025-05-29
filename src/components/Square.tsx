@@ -9,7 +9,7 @@ type SquareProps = {
 function Square({ value, onSquareClick }: SquareProps) {
   return (
     <button
-      className="w-16 h-16 flex items-center justify-center text-xl font-bold border border-black"
+      className="w-20 h-20 flex items-center justify-center text-xl font-bold border border-black"
       onClick={onSquareClick}
     >
       {value}

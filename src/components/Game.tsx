@@ -44,6 +44,7 @@ function Game() {
   }
 
   const winner = calculateWinner(currentSquares);
+  const isBoardFull = currentSquares.every((square) => square !== null);
 
   function handlePlay(nextSquares: Player[]) {
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -70,19 +71,30 @@ function Game() {
   });
 
   return (
-    <div className="flex flex-row">
-      <div>
-        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
+    <div className="">
+      <div className="flex items-center justify-center text-center text-5xl mb-10">
+        Let's TicTacTo!
       </div>
-      <div className="mt-6 ml-8 text-center">
-        <div className="text-2xl">History</div>
-        <ol>{moves}</ol>
+      <div className="flex gap-[10rem] w-full p-4">
+        <div className="flex-1">
+          <Board
+            xIsNext={xIsNext}
+            squares={currentSquares}
+            onPlay={handlePlay}
+          />
+        </div>
+        <div className="flex-1 mt-6 ml-8 text-center">
+          <div className="text-2xl">History</div>
+          <ol>{moves}</ol>
+        </div>
       </div>
 
-      {winner && (
+      {(winner || isBoardFull) && (
         <div className="fixed inset-0 bg-black/50 flex justify-center items-center z-50">
           <div className="bg-white p-8 rounded shadow text-center">
-            <h2 className="text-2xl mb-8 px-2">🎉 Winner: {winner} 🎉</h2>
+            <h2 className="text-2xl mb-8 px-2">
+              {winner ? `🎉 Winner: ${winner} 🎉` : "무승부입니다!"}
+            </h2>
             <button
               onClick={restartGame}
               className="bg-[#82739f] text-white px-4 py-2 rounded hover:bg-blue-600"
