@@ -1,12 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Board from "./Board";
 import type { Player } from "../types";
 
 function Game() {
-  const [history, setHistory] = useState<Player[][]>([Array(9).fill(null)]);
-  const [currentMove, setCurrentMove] = useState<number>(0);
+  const [history, setHistory] = useState<Player[][]>(() => {
+    const storedHistory = localStorage.getItem("ticTacToeHistory");
+    return storedHistory ? JSON.parse(storedHistory) : [Array(9).fill(null)];
+  });
+  const [currentMove, setCurrentMove] = useState<number>(() => {
+    const storedMove = localStorage.getItem("ticTacToeCurrentMove");
+    return storedMove ? parseInt(storedMove) : 0;
+  });
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
+
+  useEffect(() => {
+    localStorage.setItem("ticTacToeHistory", JSON.stringify(history));
+    localStorage.setItem("ticTacToeCurrentMove", currentMove.toString());
+  }, [history, currentMove]);
 
   function calculateWinner(squares: Player[]) {
     const lines = [
