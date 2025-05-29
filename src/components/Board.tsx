@@ -30,15 +30,6 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
     }
     return null;
   }
-
-  const winner = calculateWinner(squares);
-  let status;
-  if (winner) {
-    status = "Winner : " + winner;
-  } else {
-    status = "Next player : " + (xIsNext ? "X" : "O");
-  }
-
   const handleClick = (i: number) => {
     if (squares[i] || calculateWinner(squares)) return;
     const nextSquares = squares.slice();
@@ -49,6 +40,12 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
     }
     onPlay(nextSquares);
   };
+
+  let status = `Next player : ${xIsNext ? "X" : "O"}`;
+  const winner = calculateWinner(squares);
+  if (winner) {
+    status = `Winner: ${winner}`;
+  }
 
   return (
     <>
