@@ -1,7 +1,8 @@
 // import React, { useState } from "react";
+import type { Player } from "../types";
 
 type SquareProps = {
-  value: string | null;
+  value: Player;
   onSquareClick: () => void;
 };
 

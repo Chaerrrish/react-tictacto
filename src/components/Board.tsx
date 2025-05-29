@@ -1,13 +1,14 @@
 import Square from "./Square";
+import type { Player } from "../types";
 
 type BoardProps = {
   xIsNext: boolean;
-  squares: (string | null)[];
-  onPlay: (nextSquares: (string | null)[]) => void;
+  squares: Player[];
+  onPlay: (nextSquares: Player[]) => void;
 };
 
 function Board({ xIsNext, squares, onPlay }: BoardProps) {
-  function calculateWinner(squares: (string | null)[]) {
+  function calculateWinner(squares: Player[]) {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],
