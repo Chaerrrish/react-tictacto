@@ -4,7 +4,7 @@ import type { Player } from "../types";
 type BoardProps = {
   xIsNext: boolean;
   squares: Player[];
-  onPlay: (nextSquares: Player[]) => void;
+  onPlay: (nextSquares: Player[], index: number) => void;
 };
 
 function Board({ xIsNext, squares, onPlay }: BoardProps) {
@@ -39,7 +39,7 @@ function Board({ xIsNext, squares, onPlay }: BoardProps) {
     } else {
       nextSquares[i] = "O";
     }
-    onPlay(nextSquares);
+    onPlay(nextSquares, i);
   };
 
   return (
